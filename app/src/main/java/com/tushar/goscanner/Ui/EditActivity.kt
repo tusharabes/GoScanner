@@ -13,7 +13,6 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -127,6 +126,9 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
         coldImage.setImageURI(Uri.parse(intent.getStringExtra("image")))
         coldImage.warmth=0.5f
         filterImages.add(coldImage)
+
+//        Cropping an Image
+        _binding.editImage.scaleType
 
 //        Setting up the recyclerView
         adapter=FilterAdapter(this,filterImages)
