@@ -3,6 +3,8 @@ package com.tushar.goscanner.Ui
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -32,12 +34,6 @@ class MainActivity : AppCompatActivity() {
         _binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val imageResult=registerContractToOpenImage()
-
-
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
-        {
-            window.statusBarColor=resources.getColor(R.color.skyBlue,null)
-        }
 
         _binding.clickButton.setOnClickListener{
             imageResult.launch("image/*")
@@ -73,6 +69,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        MenuInflater(this).inflate(R.menu.edit_menu,menu)
+        return true
     }
 
 

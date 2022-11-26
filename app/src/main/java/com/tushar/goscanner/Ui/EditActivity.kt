@@ -3,15 +3,18 @@ package com.tushar.goscanner.Ui
 
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.media.Image
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.databinding.DataBindingUtil
@@ -47,6 +50,11 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
         image= ImageFilterView(this)
         image.setImageURI(Uri.parse(intent.getStringExtra("image")))
         imageUri=Uri.parse(intent.getStringExtra("image"))
+
+
+//        Setting up the backbutton
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         if(intent.getStringExtra("image")!=null)
@@ -147,7 +155,7 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
             1 -> {
                 _binding.editImage.setImageURI(imageUri)
                 _binding.editImage.warmth=1.0f
-                _binding.editImage.saturation = 0.5f
+                _binding.editImage.saturation = 0.0f
                 Log.d("Tag","Saturation${_binding.editImage.saturation}")
 
             }
@@ -166,6 +174,14 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater=MenuInflater(this).inflate(R.menu.edit_menu,menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId)
+        {
+            android.R.id.home->finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
