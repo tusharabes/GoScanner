@@ -172,7 +172,7 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater=MenuInflater(this).inflate(R.menu.edit_menu,menu)
+      menuInflater.inflate(R.menu.edit_menu,menu)
         return true
     }
 

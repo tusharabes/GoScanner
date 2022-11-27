@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         _binding.documents.adapter=documentAdapter
 
 
-
     }
 
     private fun registerContractToOpenImage(): ActivityResultLauncher<String> {
