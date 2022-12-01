@@ -6,4 +6,9 @@
     android:title="Open Doc"
     android:icon="@drawable/file_image"
     />
+    <item android:id="@+id/delete"
+        app:showAsAction="ifRoom"
+        android:title="Open Doc"
+        android:icon="@drawable/delete"
+        />
 </menu>

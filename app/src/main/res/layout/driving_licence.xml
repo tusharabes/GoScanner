@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -7,16 +8,16 @@
 
     <data>
         <variable
-            name="documentType"
+            name="bvDocument"
             type="String" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".Ui.DrivingLicence">
-
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,28 +27,28 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-        <TextView
-            android:id="@+id/noDlText"
-            android:text="Empty Document"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/noDlText"
-            android:src="@drawable/file_image" />
+            <TextView
+                android:id="@+id/noDlText"
+                android:text="Empty Document"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/noDlText"
+                android:src="@drawable/file_image" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -58,9 +59,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.constraintlayout.utils.widget.ImageFilterView>
+
         <TextView
             android:id="@+id/document_type"
             android:layout_width="match_parent"
@@ -68,15 +70,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{documentType}"
+            android:text="@{bvDocument}"
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:shadowColor="@color/white"
             android:background="@color/black"
             android:alpha="0.6"
             android:visibility="visible"
-            android:gravity="center"
-            />
+            android:gravity="center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,11 +4,11 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/skyBlue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/skyBlue</item>
         <!-- Customize your theme here. -->
@@ -18,6 +18,11 @@
     <style name="SplashScreen" parent="Theme.MaterialComponents.Light">
         <item name="android:statusBarColor">@color/skyBlue</item>
         <item name="android:drawable">@drawable/splashscreen</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/skyBlue</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

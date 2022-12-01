@@ -1,28 +1,39 @@
 package com.tushar.goscanner.Ui
 
 
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.DialogInterface
+import android.graphics.Bitmap
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import android.media.Image
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.utils.widget.ImageFilterView
+import androidx.core.view.drawToBitmap
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tushar.goscanner.R
 import com.tushar.goscanner.adapter.FilterAdapter
 import com.tushar.goscanner.databinding.ActivityEditBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
@@ -32,6 +43,8 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
     private lateinit var filterImages: ArrayList<ImageView>
     private lateinit var image:ImageFilterView
     private lateinit var imageUri:Uri
+
+    private var imageName:String=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -181,7 +194,63 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
         {
             android.R.id.home->finish()
         }
+
+        when(item.itemId)
+        {
+            R.id.save->{
+                dialogForEditImageName()
+            }
+        }
+
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveToInternalStorage(bitmapImage: Bitmap): String? {
+        val cw = ContextWrapper(applicationContext)
+        // path to /data/data/yourapp/app_data/imageDir
+        val directory: File = cw.getDir("editImage", Context.MODE_PRIVATE)
+        // Create editImage
+        val mypath = File(directory, "$imageName.jpg")
+        var fos: FileOutputStream? = null
+
+        try {
+            fos = FileOutputStream(mypath)
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 90, fos)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            try {
+                fos?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        return directory.absolutePath
+    }
+
+    private fun dialogForEditImageName()
+    {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Title")
+
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+
+        builder.setPositiveButton("SAVE",
+            DialogInterface.OnClickListener { dialog, which ->
+                imageName = input.text.toString()
+                lifecycleScope.launch(Dispatchers.IO)
+                {
+                    saveToInternalStorage(_binding.editImage.drawToBitmap())
+                }
+
+            })
+        builder.setNegativeButton("Cancel",
+            DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+
+        builder.show()
     }
 
 }

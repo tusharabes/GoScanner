@@ -18,29 +18,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.drawToBitmap
 import androidx.databinding.DataBindingUtil
 import com.tushar.goscanner.R
-import com.tushar.goscanner.databinding.ActivityDrivingLicenceBinding
+import com.tushar.goscanner.databinding.DrivingLicenceBinding
 import java.io.*
 
 
 class DrivingLicence : AppCompatActivity() {
 
-    private lateinit var mBinding:ActivityDrivingLicenceBinding
+    private lateinit var mBinding:DrivingLicenceBinding
     private lateinit var openImage:ActivityResultLauncher<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_GoScanner)
-        setContentView(R.layout.activity_driving_licence)
+        setContentView(R.layout.driving_licence)
 
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        mBinding=DataBindingUtil.setContentView(this,R.layout.activity_driving_licence)
-
+        mBinding=DataBindingUtil.setContentView(this,R.layout.driving_licence)
+        mBinding.bvDocument="Driving Licence"
 
 
         loadImageFromStorage("/data/user/0/com.tushar.goscanner/app_imageDir")
+
 
         openImage=registerContractToOpenImage()
 

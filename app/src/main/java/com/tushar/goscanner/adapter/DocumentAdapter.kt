@@ -10,9 +10,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.tushar.goscanner.R
+import com.tushar.goscanner.Ui.AadharCard
 import com.tushar.goscanner.Ui.DrivingLicence
-import com.tushar.goscanner.Ui.MainActivity
 import com.tushar.goscanner.Ui.Passport
+import com.tushar.goscanner.Ui.VoterId
 import com.tushar.goscanner.model.DocumentData
 
 class DocumentAdapter(var contexts: Context, documentDataArrayList: ArrayList<DocumentData>) :
@@ -42,16 +43,25 @@ class DocumentAdapter(var contexts: Context, documentDataArrayList: ArrayList<Do
 
                 }
                 1->{
-                    contexts.startActivity(Intent(contexts,Passport::class.java).apply {
+                    contexts.startActivity(Intent(contexts, Passport::class.java).apply {
                         putExtra("document","Passport")
                     })
+                }
+
+                2->{
+                    contexts.startActivity(Intent(context,VoterId::class.java))
+                }
+                3->{
+                    contexts.startActivity(Intent(contexts,AadharCard::class.java))
                 }
             }
         }
 
 
-
         courseIV.setImageResource(documentList!!.imgid)
+        courseTV.text = documentList.document_name
+
+
         return listitemView
     }
 }
