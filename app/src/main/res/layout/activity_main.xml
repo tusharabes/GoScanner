@@ -45,12 +45,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/openDocs"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             android:layout_marginTop="20dp"
-            android:background="@color/skyBlue">
+            android:background="@drawable/gradient_blue">
 
             <TextView
                 android:id="@+id/textDocument"
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:text="Documents"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,36 +69,43 @@
                 android:id="@+id/fileNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 Files"
-                android:textColor="#ff0000"
+                android:text="@{textView}"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textDocument" />
 
             <Button
+                android:id="@+id/editDocs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fileNumber"
-                android:backgroundTint="#ADD8E6"
+                android:backgroundTint="#ff0000"
                 android:text="Open"
-                android:textColor="@color/grey"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/white"
                 />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/clickButton"
-            app:icon="@drawable/gallery_image"
+            android:src="@drawable/gallery_image"
             android:text="Open Gallery"
+            android:foregroundTint="@color/white"
             android:textColor="@color/white"
             android:backgroundTint="@color/skyBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/openDocs" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+           />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

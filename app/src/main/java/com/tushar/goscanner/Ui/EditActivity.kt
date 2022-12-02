@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.DialogInterface
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.net.Uri
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.view.drawToBitmap
+import androidx.core.view.marginStart
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -206,16 +208,15 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
     }
 
     private fun saveToInternalStorage(bitmapImage: Bitmap): String? {
-        val cw = ContextWrapper(applicationContext)
-        // path to /data/data/yourapp/app_data/imageDir
-        val directory: File = cw.getDir("editImage", Context.MODE_PRIVATE)
+
         // Create editImage
-        val mypath = File(directory, "$imageName.jpg")
+        val mypath  = File(filesDir, "$imageName.jpg")
         var fos: FileOutputStream? = null
+
 
         try {
             fos = FileOutputStream(mypath)
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 90, fos)
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 90, fos)
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -226,17 +227,22 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
             }
         }
 
-        return directory.absolutePath
+        return filesDir.toString()
     }
 
     private fun dialogForEditImageName()
     {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setTitle("Title")
+        builder.setTitle("File Name : ")
 
         val input = EditText(this)
         input.inputType = InputType.TYPE_CLASS_TEXT
+        input.hint="     eg : scannedImage"
+        input.setHintTextColor(Color.GRAY)
+
+
         builder.setView(input)
+
 
         builder.setPositiveButton("SAVE",
             DialogInterface.OnClickListener { dialog, which ->

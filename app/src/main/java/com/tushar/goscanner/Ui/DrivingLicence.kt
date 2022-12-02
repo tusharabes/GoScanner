@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -27,6 +25,8 @@ class DrivingLicence : AppCompatActivity() {
     private lateinit var mBinding:DrivingLicenceBinding
     private lateinit var openImage:ActivityResultLauncher<String>
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_GoScanner)
@@ -38,6 +38,8 @@ class DrivingLicence : AppCompatActivity() {
 
         mBinding=DataBindingUtil.setContentView(this,R.layout.driving_licence)
         mBinding.bvDocument="Driving Licence"
+
+
 
 
         loadImageFromStorage("/data/user/0/com.tushar.goscanner/app_imageDir")

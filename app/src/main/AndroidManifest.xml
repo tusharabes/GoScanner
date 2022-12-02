@@ -16,6 +16,9 @@
         android:theme="@style/SplashScreen"
         tools:targetApi="31">
         <activity
+            android:name=".Ui.DocsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Ui.AadharCard"
             android:exported="false" />
         <activity
