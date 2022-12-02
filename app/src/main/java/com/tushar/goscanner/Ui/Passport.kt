@@ -1,16 +1,12 @@
 package com.tushar.goscanner.Ui
 
-import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.tushar.goscanner.R
 import com.tushar.goscanner.databinding.ActivityPassportBinding
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
 
 class Passport : AppCompatActivity() {
 

@@ -2,10 +2,7 @@ package com.tushar.goscanner.viewmodel
 
 import android.app.Application
 import android.util.Log
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tushar.goscanner.repository.ImageRepository

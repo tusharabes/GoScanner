@@ -2,7 +2,6 @@ package com.tushar.goscanner.Ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,7 +14,6 @@ import com.tushar.goscanner.adapter.DocumentAdapter
 import com.tushar.goscanner.databinding.ActivityMainBinding
 import com.tushar.goscanner.model.DocumentData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 

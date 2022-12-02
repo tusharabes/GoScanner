@@ -1,8 +1,6 @@
 package com.tushar.goscanner.Ui
 
 
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -23,7 +21,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.view.drawToBitmap
-import androidx.core.view.marginStart
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
