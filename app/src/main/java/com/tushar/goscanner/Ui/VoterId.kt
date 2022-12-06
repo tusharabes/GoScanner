@@ -72,7 +72,7 @@ class VoterId : AppCompatActivity() {
         }
     }
 
-    private fun saveToInternalStorage(bitmapImage: Bitmap): String? {
+    private  fun saveToInternalStorage(bitmapImage: Bitmap): String? {
         val cw = ContextWrapper(applicationContext)
         // path to /data/data/yourapp/app_data/imageDir
         val directory: File = cw.getDir("imageDir", Context.MODE_PRIVATE)
@@ -92,7 +92,8 @@ class VoterId : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        mBinding.voterIdImage.visibility=View.VISIBLE
+
+
         return directory.absolutePath
     }
 
@@ -105,10 +106,12 @@ class VoterId : AppCompatActivity() {
             else
             {
                 mBinding.voterIdImage.setImageURI(it)
+                mBinding.voterIdImage.visibility=View.VISIBLE
                lifecycleScope.launch(Dispatchers.IO)
                {
                    saveToInternalStorage(mBinding.voterIdImage.drawToBitmap())
                }
+
             }
 
         }

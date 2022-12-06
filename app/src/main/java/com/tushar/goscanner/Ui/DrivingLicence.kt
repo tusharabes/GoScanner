@@ -89,7 +89,6 @@ class DrivingLicence : AppCompatActivity() {
             }
         }
 
-        mBinding.drivingLicenceImage.visibility=View.VISIBLE
         return directory.absolutePath
     }
 
@@ -160,6 +159,7 @@ class DrivingLicence : AppCompatActivity() {
             else
             {
                 mBinding.drivingLicenceImage.setImageURI(it)
+                mBinding.drivingLicenceImage.visibility=View.VISIBLE
                 lifecycleScope.launch(Dispatchers.IO)
                 {
                     saveToInternalStorage(mBinding.drivingLicenceImage.drawToBitmap())

@@ -25,8 +25,12 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:scaleType="centerCrop"
-            android:layout_margin="10dp"
+            android:scaleType="fitXY"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:src="@mipmap/scanner_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -110,7 +114,7 @@
 
             <TextView
                 android:id="@+id/textContrast"
-                android:text="Contrast "
+                android:text="Opaque "
                 android:layout_marginStart="3dp"
                 android:layout_gravity="center"
                 android:textStyle="bold|italic"

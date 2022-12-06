@@ -9,6 +9,7 @@
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/gallery_image.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/gradient_blue.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/ic_launcher_background.xml" value="0.107" />
+        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/save_edit_image.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/scanner_imagef.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/splashscreen.xml" value="0.107" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/drawable/yes_foreground.xml" value="0.1" />
@@ -16,8 +17,8 @@
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_aadhar_card.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_docs_list_activity.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_driving_licence.xml" value="0.22916666666666666" />
-        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_edit.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_edit.xml" value="0.22" />
+        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_passport.xml" value="0.1796875" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/activity_voter_id.xml" value="0.165625" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/docs_list.xml" value="0.22" />
@@ -25,8 +26,9 @@
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/driving_licence.xml" value="0.25277777777777777" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/filter_items.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/layout/voter_id.xml" value="0.1" />
-        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/menu/edit_menu.xml" value="0.22" />
+        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/menu/edit_menu.xml" value="0.1" />
         <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/menu/open_doc_menu.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/tuagarwal/GoScanner/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.119" />
       </map>
     </option>
   </component>

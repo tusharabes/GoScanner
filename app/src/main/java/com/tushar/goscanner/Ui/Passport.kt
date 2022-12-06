@@ -71,7 +71,6 @@ class Passport : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        mBinding.passportImage.visibility=View.VISIBLE
         return directory.absolutePath
     }
 
@@ -114,6 +113,7 @@ class Passport : AppCompatActivity() {
             else
             {
                 mBinding.passportImage.setImageURI(it)
+                mBinding.passportImage.visibility=View.VISIBLE
                 lifecycleScope.launch(Dispatchers.IO)
                 {
 

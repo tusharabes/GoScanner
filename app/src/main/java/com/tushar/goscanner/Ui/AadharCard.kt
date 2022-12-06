@@ -45,7 +45,6 @@ class AadharCard : AppCompatActivity() {
         {
             loadImageFromStorage(VoterId.imagePath)
         }
-
     }
 
     private suspend fun loadImageFromStorage(path: String) {
@@ -83,7 +82,7 @@ class AadharCard : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        mBinding.aadharImage.visibility=View.VISIBLE
+
         return directory.absolutePath
     }
 
@@ -96,6 +95,7 @@ class AadharCard : AppCompatActivity() {
             else
             {
                 mBinding.aadharImage.setImageURI(it)
+                mBinding.aadharImage.visibility=View.VISIBLE
                 lifecycleScope.launch(Dispatchers.IO) {
                     saveToInternalStorage(mBinding.aadharImage.drawToBitmap())
                 }

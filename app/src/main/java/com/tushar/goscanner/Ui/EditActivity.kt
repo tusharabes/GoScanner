@@ -2,6 +2,7 @@ package com.tushar.goscanner.Ui
 
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ColorMatrix
@@ -17,6 +18,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.utils.widget.ImageFilterView
@@ -28,8 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tushar.goscanner.R
 import com.tushar.goscanner.adapter.FilterAdapter
 import com.tushar.goscanner.databinding.ActivityEditBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -180,7 +181,6 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
                 _binding.editImage.warmth = 0.5f
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -189,16 +189,15 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId)
-        {
-            android.R.id.home->finish()
-        }
 
         when(item.itemId)
         {
+            android.R.id.home->finish()
+
             R.id.save->{
                 dialogForEditImageName()
             }
+
         }
 
         return super.onOptionsItemSelected(item)
@@ -214,6 +213,7 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
         try {
             fos = FileOutputStream(mypath)
             bitmapImage.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -243,10 +243,18 @@ class EditActivity : AppCompatActivity() , FilterAdapter.ImageClickListener{
 
         builder.setPositiveButton("SAVE",
             DialogInterface.OnClickListener { dialog, which ->
-                imageName = input.text.toString()
-                lifecycleScope.launch(Dispatchers.IO)
+                imageName = input.text.trim().toString()
+                val result:Deferred<String?> = lifecycleScope.async(Dispatchers.IO)
                 {
                     saveToInternalStorage(_binding.editImage.drawToBitmap())
+                }
+                lifecycleScope.launch(Dispatchers.Main)
+                {
+                    if(result.await()!=null)
+                    {
+                        Toast.makeText(applicationContext,"Successfully Saved",Toast.LENGTH_SHORT).show()
+                    }
+
                 }
 
             })

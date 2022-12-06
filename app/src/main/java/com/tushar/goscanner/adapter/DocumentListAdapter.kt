@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.tushar.goscanner.R
 import com.tushar.goscanner.Ui.DocsListActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DocumentListAdapter(val context: Context) : RecyclerView.Adapter<DocumentListAdapter.InnerViewHolder>() {
 
@@ -39,8 +41,10 @@ class DocumentListAdapter(val context: Context) : RecyclerView.Adapter<DocumentL
     }
 
     override fun onBindViewHolder(holder: InnerViewHolder, position: Int) {
+
         holder.imageView.setImageBitmap(images[position])
-        holder.textView.text = names[position]
+        val tempName=names[position].substring(0,names[position].length-4)
+        holder.textView.text = tempName
         holder.timeText.text= fileDate[position]
 
         holder.delete.setOnClickListener{

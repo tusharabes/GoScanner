@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tushar.goscanner">
 
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,31 +13,39 @@
         android:roundIcon="@mipmap/scanner_image_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreen"
-        tools:targetApi="31">
+        tools:ignore="LockedOrientationActivity"
+        tools:targetApi="32">
         <activity
             android:name=".Ui.DocsListActivity"
-            android:exported="false" />
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
         <activity
             android:name=".Ui.AadharCard"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Ui.VoterId"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Ui.Passport"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Ui.DrivingLicence"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Ui.EditActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".Ui.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

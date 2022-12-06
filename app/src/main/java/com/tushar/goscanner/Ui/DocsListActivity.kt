@@ -1,6 +1,5 @@
 package com.tushar.goscanner.Ui
 
-import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -18,8 +17,6 @@ import com.tushar.goscanner.adapter.DeleteDocs
 import com.tushar.goscanner.adapter.DocumentListAdapter
 import com.tushar.goscanner.databinding.ActivityDocsListActivityBinding
 import com.tushar.goscanner.viewmodel.DocumentListVM
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
 
