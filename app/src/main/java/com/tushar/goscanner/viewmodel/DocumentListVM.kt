@@ -3,6 +3,7 @@ package com.tushar.goscanner.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.tushar.goscanner.repository.ImageRepository
@@ -11,12 +12,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
+
 class DocumentListVM(application: Application) : AndroidViewModel(application) {
 
-    var dlImage= MutableLiveData<List<File>?>()
-    var dlImageImmutable= dlImage.value
+    var documentList= MutableLiveData<List<File>?>()
+    var documentListImmutable  = documentList as LiveData<List<File>?>
 
-     private var repo:ImageRepository = ImageRepository()
+    private var repo:ImageRepository = ImageRepository()
 
     private var context=application
 
@@ -28,7 +30,7 @@ class DocumentListVM(application: Application) : AndroidViewModel(application) {
             Log.d("Tag","${x?.size}")
             withContext(Dispatchers.Main)
             {
-                dlImage.value=x?.toList()
+                documentList.value=x?.toList()
             }
 
         }
@@ -41,7 +43,7 @@ class DocumentListVM(application: Application) : AndroidViewModel(application) {
 
         withContext(Dispatchers.Main)
         {
-            dlImage.value=x?.toList()
+            documentList.value=x?.toList()
             Log.d("Tag","Deleted")
         }
     }

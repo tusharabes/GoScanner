@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.*
+import java.util.*
 
 
 class VoterId : AppCompatActivity() {
@@ -39,6 +39,8 @@ class VoterId : AppCompatActivity() {
 
         setTheme(R.style.Theme_GoScanner)
         setContentView(R.layout.voter_id)
+
+
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -90,7 +92,7 @@ class VoterId : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        Log.d("tag","${directory.absolutePath}")
+        mBinding.voterIdImage.visibility=View.VISIBLE
         return directory.absolutePath
     }
 
@@ -103,7 +105,10 @@ class VoterId : AppCompatActivity() {
             else
             {
                 mBinding.voterIdImage.setImageURI(it)
-                saveToInternalStorage(mBinding.voterIdImage.drawToBitmap())
+               lifecycleScope.launch(Dispatchers.IO)
+               {
+                   saveToInternalStorage(mBinding.voterIdImage.drawToBitmap())
+               }
             }
 
         }
@@ -127,43 +132,29 @@ class VoterId : AppCompatActivity() {
 
     private fun openAlertDialog() {
 
-        // Create the object of AlertDialog Builder class
         val builder: AlertDialog.Builder = AlertDialog.Builder(this@VoterId)
-
-        // Set the message show for the Alert time
-
         builder.setMessage("Do you want to Delete VoterId ?")
 
-
-        // Set Alert Title
         builder.setTitle("Delete VoterId!")
 
         builder.setCancelable(false)
 
 
-        builder.setPositiveButton("Yes",
-            DialogInterface.OnClickListener { dialog: DialogInterface, which: Int ->
-                // If user click no then dialog box is canceled.
-                dialog.cancel()
-                deleteVoterIdImage()
-                mBinding.voterIdImage.visibility=View.INVISIBLE
-            } as DialogInterface.OnClickListener)
+        builder.setPositiveButton("Yes"
+        ) { dialog: DialogInterface, _: Int ->
+            // If user click no then dialog box is canceled.
+            dialog.cancel()
+            deleteVoterIdImage()
+            mBinding.voterIdImage.visibility = View.INVISIBLE
+        }
 
-        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
 
-        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setNegativeButton("No",
-            DialogInterface.OnClickListener { dialog: DialogInterface, which: Int ->
-                // If user click no then dialog box is canceled.
-                dialog.cancel()
-            } as DialogInterface.OnClickListener)
+        builder.setNegativeButton("No"
+        ) { dialog: DialogInterface, _: Int ->
+            dialog.cancel()
+        }
 
-        // Create the Alert dialog
-
-        // Create the Alert dialog
         val alertDialog: AlertDialog = builder.create()
-        // Show the Alert Dialog box
-        // Show the Alert Dialog box
         alertDialog.show()
     }
 

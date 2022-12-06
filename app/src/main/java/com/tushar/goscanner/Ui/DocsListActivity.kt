@@ -1,11 +1,13 @@
 package com.tushar.goscanner.Ui
 
+import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -16,14 +18,21 @@ import com.tushar.goscanner.adapter.DeleteDocs
 import com.tushar.goscanner.adapter.DocumentListAdapter
 import com.tushar.goscanner.databinding.ActivityDocsListActivityBinding
 import com.tushar.goscanner.viewmodel.DocumentListVM
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DocsListActivity : AppCompatActivity() , DeleteDocs{
 
     private lateinit var mBinding: ActivityDocsListActivityBinding
     private lateinit var adapter : DocumentListAdapter
+    private lateinit var progress:ProgressBar
 
     private lateinit var imageList:ArrayList<Bitmap>
     private lateinit var fileName:ArrayList<String>
+    private lateinit var time:ArrayList<String>
+
 
     private lateinit var documentListVM : DocumentListVM
 
@@ -41,23 +50,37 @@ class DocsListActivity : AppCompatActivity() , DeleteDocs{
 
         initViews()
 
-        documentListVM.dlImage.observe(this, Observer {files->
+
+        documentListVM.documentList.observe(this, Observer {files->
+
             imageList.clear()
             fileName.clear()
+            time.clear()
+
             files?.filter{ it.isFile && it.name.contains(".jpg")|| it.name.contains(".JPG") && it.canRead()}?.map {
                 val bytes=it.readBytes()
                 val img=BitmapFactory.decodeByteArray(bytes,0,bytes.size)
 
+                val formatter = SimpleDateFormat("dd/MM/yyyy",Locale.US)
+
+                // Create a calendar object that will convert the date and time value in milliseconds to date.
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis = it.lastModified()
+
+
+                time.add(formatter.format(calendar.time))
                 imageList.add(img)
                 fileName.add(it.name)
 
             }
 
             mBinding.bvDocsCount="Documents : ${imageList.size}"
-            Log.d("Tag","Observer : ${imageList.size}")
-            adapter.updateList(imageList,fileName)
-        })
 
+            adapter.updateList(imageList,fileName,time)
+
+            progress.visibility=View.INVISIBLE
+
+        })
     }
 
     private fun initViews() {
@@ -66,8 +89,11 @@ class DocsListActivity : AppCompatActivity() , DeleteDocs{
         adapter=DocumentListAdapter(this)
         mBinding.docsRecycler.adapter=adapter
         mBinding.docsRecycler.layoutManager=LinearLayoutManager(this)
+        progress=findViewById(R.id.progressBar)
+
         imageList= ArrayList()
         fileName= ArrayList()
+        time= ArrayList()
     }
 
 

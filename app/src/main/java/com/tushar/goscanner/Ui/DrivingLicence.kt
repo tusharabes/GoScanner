@@ -3,20 +3,26 @@ package com.tushar.goscanner.Ui
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.drawToBitmap
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.tushar.goscanner.R
 import com.tushar.goscanner.databinding.DrivingLicenceBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.*
 
 
@@ -82,7 +88,8 @@ class DrivingLicence : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
-        Log.d("tag","${directory.absolutePath}")
+
+        mBinding.drivingLicenceImage.visibility=View.VISIBLE
         return directory.absolutePath
     }
 
@@ -99,9 +106,49 @@ class DrivingLicence : AppCompatActivity() {
             R.id.open -> {
                 openImage.launch("image/*")
             }
+            R.id.delete ->{
+                openAlertDialog()
+            }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+    private fun openAlertDialog() {
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this@DrivingLicence)
+        builder.setMessage("Do you want to Delete DL ?")
+
+        builder.setTitle("Delete Driving Licence!")
+
+        builder.setCancelable(false)
+
+
+        builder.setPositiveButton("Yes"
+        ) { dialog: DialogInterface, _: Int ->
+            // If user click no then dialog box is canceled.
+            dialog.cancel()
+            deleteDrivingLicence()
+            mBinding.drivingLicenceImage.visibility = View.INVISIBLE
+        }
+
+
+        builder.setNegativeButton("No"
+        ) { dialog: DialogInterface, _: Int ->
+            dialog.cancel()
+        }
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun deleteDrivingLicence() {
+        try {
+            val f = File(VoterId.imagePath, "dl.jpg")
+            f.delete()
+            Toast.makeText(this, "Driving Licence Deleted",Toast.LENGTH_SHORT).show()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
     }
 
     private fun registerContractToOpenImage(): ActivityResultLauncher<String> {
@@ -113,7 +160,10 @@ class DrivingLicence : AppCompatActivity() {
             else
             {
                 mBinding.drivingLicenceImage.setImageURI(it)
-                saveToInternalStorage(mBinding.drivingLicenceImage.drawToBitmap())
+                lifecycleScope.launch(Dispatchers.IO)
+                {
+                    saveToInternalStorage(mBinding.drivingLicenceImage.drawToBitmap())
+                }
             }
 
         }
