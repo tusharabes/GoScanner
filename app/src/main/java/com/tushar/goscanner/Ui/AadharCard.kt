@@ -45,10 +45,16 @@ class AadharCard : AppCompatActivity() {
         {
             loadImageFromStorage(VoterId.imagePath)
         }
+
+        mBinding.rotate.setOnClickListener{
+            mBinding.aadharImage.rotation=mBinding.aadharImage.rotation + 90.0f
+        }
     }
 
     private suspend fun loadImageFromStorage(path: String) {
+
         try {
+
             val f = File(path, "aadhar.jpg")
             val b = BitmapFactory.decodeStream(FileInputStream(f))
 
@@ -101,7 +107,6 @@ class AadharCard : AppCompatActivity() {
                 }
 
             }
-
         }
     }
 
@@ -165,6 +170,4 @@ class AadharCard : AppCompatActivity() {
 
         return true
     }
-
-
 }

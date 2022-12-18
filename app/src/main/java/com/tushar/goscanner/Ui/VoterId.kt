@@ -23,7 +23,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.*
-import java.util.*
 
 
 class VoterId : AppCompatActivity() {
@@ -52,6 +51,9 @@ class VoterId : AppCompatActivity() {
             loadImageFromStorage(imagePath)
         }
 
+        mBinding.rotate.setOnClickListener{
+            mBinding.voterIdImage.rotation=mBinding.voterIdImage.rotation + 90.0f
+        }
 
         imageContract=registerContractToOpenImage()
 

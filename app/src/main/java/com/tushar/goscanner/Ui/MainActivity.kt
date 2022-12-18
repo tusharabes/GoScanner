@@ -2,6 +2,7 @@ package com.tushar.goscanner.Ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var documentAdapter:DocumentAdapter
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         openGallery=findViewById(R.id.clickButton)
         _binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
-
 
 
         val imageResult=registerContractToOpenImage()
@@ -58,11 +57,12 @@ class MainActivity : AppCompatActivity() {
         documentAdapter= DocumentAdapter(this,documentList)
         _binding.documents.adapter=documentAdapter
 
+
+
         lifecycleScope.launch(Dispatchers.IO)
         {
             _binding.textView= filesDir.listFiles()?.size.toString()+" File"
         }
-
     }
 
     override fun onResume() {
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         return registerForActivityResult(ActivityResultContracts.GetContent()){
             if(it==null)
             {
-                Toast.makeText(this,"Please Select an Image",Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity,"Please Select an Image",Toast.LENGTH_LONG).show()
             }
             else{
                 val intent=Intent(this@MainActivity,EditActivity::class.java).apply {
@@ -86,8 +86,22 @@ class MainActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
-
         }
+    }
+
+    override fun onPause() {
+        Log.i("call","On Paused ")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.i("call","On Stop")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        Log.i("call","On Destroyed")
+        super.onDestroy()
     }
 
 }

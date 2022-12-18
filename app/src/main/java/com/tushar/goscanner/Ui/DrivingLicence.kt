@@ -7,7 +7,6 @@ import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -38,23 +37,17 @@ class DrivingLicence : AppCompatActivity() {
         setTheme(R.style.Theme_GoScanner)
         setContentView(R.layout.driving_licence)
 
-
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mBinding=DataBindingUtil.setContentView(this,R.layout.driving_licence)
         mBinding.bvDocument="Driving Licence"
 
-
-
-
         loadImageFromStorage("/data/user/0/com.tushar.goscanner/app_imageDir")
-
-
         openImage=registerContractToOpenImage()
 
-
-
+        mBinding.rotate.setOnClickListener{
+            mBinding.drivingLicenceImage.rotation= mBinding.drivingLicenceImage.rotation + 90.0f
+        }
 
     }
     private fun loadImageFromStorage(path: String) {

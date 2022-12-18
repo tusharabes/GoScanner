@@ -49,6 +49,10 @@ class Passport : AppCompatActivity() {
             loadImageFromStorage(VoterId.imagePath)
         }
 
+        mBinding.rotate.setOnClickListener{
+            mBinding.passportImage.rotation = mBinding.passportImage.rotation + 90.0f
+        }
+
     }
 
     private fun saveToInternalStorage(bitmapImage: Bitmap): String? {
